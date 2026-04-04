@@ -1,38 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Water Testing App</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
-    <style>
-        #map { height: 400px; }
-    </style>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <title>Vatten Test App</title>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 </head>
 <body>
-    <h1>Water Testing Application</h1>
-    <div id="map"></div>
+    <div class="container mx-auto">
+        <h1 class="text-3xl font-bold text-center my-4">Vatten Test App</h1>
+        <form id="testForm" class="my-4">
+            <label for="waterSource" class="block mb-2">Vattenkälla:</label>
+            <input type="text" id="waterSource" class="border p-2 w-full" required />
+            <button type="submit" class="bg-blue-500 text-white p-2 mt-2">Skicka</button>
+        </form>
+        <div id="map" style="height: 400px;"></div>
+    </div>
     <script>
+        // TODO: Firebase configuration
         const firebaseConfig = {
-            apiKey: "AIzaSyBtQ7bcDV7y_zTdYw8gJT0KppF3R6EWINU",
-            authDomain: "vattenkollen-varmdo.firebaseapp.com",
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            databaseURL: "YOUR_DATABASE_URL",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
         };
-        const app = firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
-
-        // Initialize Leaflet map
-        const map = L.map('map').setView([59.3293, 18.0686], 13);
-
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        document.getElementById('testForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const waterSource = document.getElementById('waterSource').value;
+            // Code to save data to Firebase
+            console.log(waterSource);
+        });
+        // Leaflet map initialization
+        var mymap = L.map('map').setView([59.3293, 18.0686], 10);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
             attribution: '© OpenStreetMap'
-        }).addTo(map);
-
-        // Your water testing form functionality here
+        }).addTo(mymap);
     </script>
 </body>
 </html>
