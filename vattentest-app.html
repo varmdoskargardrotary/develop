@@ -3,44 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vattenkollen Värmdö</title>
+    <title>Water Testing App</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+    <style>
+        #map { height: 400px; }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Welcome to Vattenkollen Värmdö</h1>
-    </header>
-    <main>
-        <section>
-            <h2>Water Testing Application</h2>
-            <p>This application allows you to monitor water testing results for various water sources.</p>
-        </section>
-        <section>
-            <h2>Testing Results</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Location</th>
-                        <th>Date</th>
-                        <th>Result</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Värmdö Beach</td>
-                        <td>2026-04-01</td>
-                        <td>Clear</td>
-                    </tr>
-                    <tr>
-                        <td>Väddöviken</td>
-                        <td>2026-04-01</td>
-                        <td>Murky</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2026 Vattenkollen Värmdö. All rights reserved.</p>
-    </footer>
+    <h1>Water Testing Application</h1>
+    <div id="map"></div>
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyBtQ7bcDV7y_zTdYw8gJT0KppF3R6EWINU",
+            authDomain: "vattenkollen-varmdo.firebaseapp.com",
+        };
+        const app = firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // Initialize Leaflet map
+        const map = L.map('map').setView([59.3293, 18.0686], 13);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+
+        // Your water testing form functionality here
+    </script>
 </body>
 </html>
