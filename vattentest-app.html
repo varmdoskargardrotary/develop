@@ -210,9 +210,6 @@
     </div>
 
     <script type="module">
-        // Sätt debug-flag i localStorage
-// Gör detta innan du importerar / initierar App Check
-localStorage.setItem('firebaseAppCheckDebugToken', 'true');
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getFirestore, collection, addDoc, onSnapshot, query } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
         import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
@@ -235,7 +232,6 @@ localStorage.setItem('firebaseAppCheckDebugToken', 'true');
 
         import { initializeAppCheck, ReCaptchaV3Provider } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app-check.js";
 
-            self.FIREBASE_APPCHECK_DEBUG_TOKEN = true;
         const appCheck = initializeAppCheck(app, {
              provider: new ReCaptchaV3Provider('6Ldq9KcsAAAAAF2Sm-tg9XeOvkO-WFh1DzAPRJzg'),
               isTokenAutoRefreshEnabled: true
