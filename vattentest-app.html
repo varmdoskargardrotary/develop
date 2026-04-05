@@ -230,7 +230,7 @@
         const auth = getAuth(app);
         const appId = 'varmdo-vattentest';
 
-        import { initializeAppCheck, ReCaptchaV3Provider } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app-check.js";
+        import { initializeAppCheck, ReCaptchaEnterpriseProvider } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app-check.js";
 
         const appCheck = initializeAppCheck(app, {
              provider: new ReCaptchaEnterpriseProvider('6LfeI6gsAAAAAPshLdrpAIp0EUHV9fCM0h9l1DxX'),
