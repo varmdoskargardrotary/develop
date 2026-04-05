@@ -31,8 +31,6 @@
 <body class="bg-slate-50 text-slate-900 pb-20">
 
     <div id="app" class="max-w-3xl mx-auto min-h-screen flex flex-col">
-        
-        <!-- Header -->
         <header class="bg-[#1e40af] text-white p-4 shadow-md flex justify-between items-center sticky top-0 z-50">
             <div>
                 <h1 class="text-xl font-bold flex items-center gap-2">
@@ -44,7 +42,6 @@
             <div id="connection-status" class="w-3 h-3 bg-slate-400 rounded-full"></div>
         </header>
         
-        <!-- Tabs -->
         <nav class="px-4 mt-6">
             <div class="bg-slate-200 p-1 rounded-xl flex gap-1 shadow-sm">
                 <button id="btn-rapportera" class="flex-1 py-2.5 rounded-lg font-bold transition-all tab-active text-sm">Rapportera</button>
@@ -52,11 +49,9 @@
             </div>
         </nav>
 
-        <!-- Main Content -->
         <main class="flex-grow px-4 mt-6">
-            
-            <!-- View: Rapportera -->
             <div id="view-rapportera" class="space-y-6 pb-12">
+                <!-- Sektion 1: Bakgrund -->
                 <section class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
                     <div class="flex justify-between items-start mb-4">
                         <h2 class="text-lg font-bold flex items-center gap-2">📍 1. Bakgrund</h2>
@@ -66,7 +61,6 @@
                             <div id="kod-status" class="text-[10px] font-bold mt-1 h-3"></div>
                         </div>
                     </div>
-
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                         <select id="form-skola" class="w-full p-2 border border-slate-200 rounded-md outline-none focus:ring-1 focus:ring-blue-500">
                             <option value="">-- Skola --</option>
@@ -77,7 +71,6 @@
                         <input id="form-klass" placeholder="Klass (t.ex. 8a)" class="w-full p-2 border border-slate-200 rounded-md outline-none">
                     </div>
                     <input id="form-plats" placeholder="Platsens namn" class="w-full p-2 border border-slate-200 rounded-md outline-none mb-4">
-
                     <p class="text-xs font-bold text-slate-500 mb-2">Markera testplats på kartan</p>
                     <div id="map-report" class="mb-4"></div>
                     <div class="flex gap-2 items-center">
@@ -86,9 +79,9 @@
                     </div>
                 </section>
 
+                <!-- Sektion 2: Vattenanalys -->
                 <section id="section-analysis" class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 transition-all">
                     <h2 class="text-lg font-bold flex items-center gap-2 mb-6">🧪 2. Vattenanalys</h2>
-                    
                     <div class="grid grid-cols-2 gap-6 mb-8">
                         <div>
                             <label class="text-[10px] uppercase font-bold text-slate-400 block mb-1">Vattentemp (°C)</label>
@@ -107,7 +100,6 @@
                             <input id="form-syrehalt" type="number" class="w-full p-2 border border-slate-200 rounded-md outline-none" placeholder="0">
                         </div>
                     </div>
-
                     <div id="ph-container" class="mb-10 transition-all">
                         <div class="flex justify-between items-center mb-2">
                             <label class="text-[10px] font-bold text-slate-400 tracking-wider">SURHET (pH)</label>
@@ -117,7 +109,6 @@
                             <input id="form-ph" type="range" min="0" max="14" step="0.1" value="0" class="w-full relative z-10">
                         </div>
                     </div>
-
                     <div class="bg-blue-50/50 p-5 rounded-xl border border-blue-100 mb-8 space-y-4">
                         <h3 class="text-[10px] font-bold text-blue-800 uppercase tracking-widest">Näringsämnen & Bakterier</h3>
                         <div class="grid grid-cols-2 gap-4">
@@ -141,7 +132,6 @@
                             </select>
                         </div>
                     </div>
-
                     <div class="grid grid-cols-2 gap-8 text-center">
                         <div>
                             <label class="text-[9px] font-bold text-slate-400 uppercase block mb-2">Finns blågröna Alger?</label>
@@ -160,31 +150,28 @@
                     </div>
                 </section>
 
+                <!-- Sektion 3: Observationer -->
                 <section class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
                     <h2 class="text-lg font-bold flex items-center gap-2 mb-4">📝 3. Observationer</h2>
                     <textarea id="form-obs" placeholder="Egna observationer (djur, växter, skräp, lukt)..." class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 min-h-[100px] mb-4 outline-none"></textarea>
                     <label class="text-[10px] font-bold text-slate-400 uppercase block mb-2">Vad tyckte ni om vattentestväskan?</label>
                     <textarea id="form-vaska" placeholder="Hur fungerade materialet?" class="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 min-h-[80px] outline-none"></textarea>
                 </section>
-
                 <button id="btn-submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl shadow-lg transition-transform active:scale-[0.98]">
                     Skicka in er vattentest
                 </button>
             </div>
 
-            <!-- View: Utforska -->
             <div id="view-utforska" class="hidden space-y-6 pb-12">
                 <p class="text-xs font-bold text-slate-500 mb-2">På kartan markeras fältstudier gjorda med Rotarys Vattentestväska</p>
                 <div class="flex justify-center">
                     <div id="map-explore" class="shadow-xl border-4 border-white"></div>
                 </div>
-                
                 <div class="bg-white p-6 rounded-2xl border border-slate-100 flex flex-wrap justify-center gap-8 shadow-sm">
                     <div class="flex items-center gap-2"><div class="w-4 h-4 rounded-full bg-[#1e40af]"></div><span class="text-sm font-bold text-slate-600">Hemmestaskolan</span></div>
                     <div class="flex items-center gap-2"><div class="w-4 h-4 rounded-full bg-[#22c55e]"></div><span class="text-sm font-bold text-slate-600">Kyrkskolan</span></div>
                     <div class="flex items-center gap-2"><div class="w-4 h-4 rounded-full bg-[#a855f7]"></div><span class="text-sm font-bold text-slate-600">Lemshaga</span></div>
                 </div>
-
                 <button id="btn-download" class="w-full flex items-center justify-center gap-2 bg-white border-2 border-blue-100 text-blue-600 font-bold py-3 rounded-xl hover:bg-blue-50 transition-colors">
                     <i data-lucide="download" class="w-5 h-5"></i>
                     Ladda ner alla testresultat
@@ -192,7 +179,6 @@
             </div>
         </main>
 
-        <!-- Footer -->
         <footer class="mt-auto text-center py-8 opacity-60">
             <p class="text-[10px] uppercase font-bold tracking-widest text-slate-400 mb-2">Ett initiativ från</p>
             <a href="https://varmdoskargard.se/page/vattentestväskan/" target="_blank" class="text-slate-600 hover:text-blue-600 font-bold underline flex items-center justify-center gap-1">
@@ -212,7 +198,6 @@
         </div>
     </div>
 
-    <!-- Firebase Script -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getFirestore, collection, addDoc, onSnapshot, query } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
@@ -235,22 +220,15 @@
         const auth = getAuth(app);
         const appId = 'varmdo-vattentest';
 
-        // Fix för App Check 400 error i utvecklingsmiljö
-        // Om domänen inte är godkänd i Google Cloud Console kommer Enterprise-providern krascha.
-        // Vi använder en debug-provider som fallback för att appen ska gå att använda.
-        // self.FIREBASE_APPCHECK_DEBUG_TOKEN = true;
-        
-        // Init App Check korrekt
-        try {
-            initializeAppCheck(app, {
-                provider: new ReCaptchaEnterpriseProvider('6LfeI6gsAAAAAPshLdrpAIp0EUHV9fCM0h9l1DxX'),
-                isTokenAutoRefreshEnabled: true
-            });
-            console.log("Firebase App Check initierat!");
-        } catch (err) {
-            console.warn("Kunde inte initiera App Check: fortsätter utan säkerhetslager", e);
-        }
-        
+        // Tvinga debug-token för testning
+        self.FIREBASE_APPCHECK_DEBUG_TOKEN = "cd63dad5-1adb-49e0-bbed-81bc47f5ac80"; 
+
+        // Initiera App Check
+        const appCheck = initializeAppCheck(app, {
+            provider: new ReCaptchaEnterpriseProvider('6LfeI6gsAAAAAPshLdrpAIp0EUHV9fCM0h9l1DxX'),
+            isTokenAutoRefreshEnabled: true
+        });
+
         let currentPos = [59.3293, 18.3869];
         let reportMap, exploreMap, reportMarker;
         let selectedAlger = null;
@@ -268,19 +246,17 @@
             initMaps();
             setupEventListeners();
             
-            try {
-                // Vänta på auth
-                await signInAnonymously(auth);
-                onAuthStateChanged(auth, (user) => {
-                    if (user) {
-                        document.getElementById('connection-status').className = "w-3 h-3 bg-green-400 rounded-full shadow-[0_0_8px_rgba(74,222,128,0.6)]";
-                        loadData();
-                    }
-                });
-            } catch (err) { 
-                console.error(err);
-                alert("Kunde inte ansluta till databasen.");
-            }
+            // Vänta på autentisering innan vi laddar data
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    console.log("Användare inloggad anonymt:", user.uid);
+                    document.getElementById('connection-status').className = "w-3 h-3 bg-green-400 rounded-full shadow-[0_0_8px_rgba(74,222,128,0.6)]";
+                    // Ladda data först när vi är säkra på att vi har en session
+                    loadData(user);
+                } else {
+                    signInAnonymously(auth).catch(err => console.error("Inloggningsfel:", err));
+                }
+            });
         }
 
         function initMaps() {
@@ -334,12 +310,14 @@
 
             setupToggleGroup('alger-group', (val) => selectedAlger = val);
             setupToggleGroup('status-group', (val) => selectedStatus = val);
+            
             document.getElementById('btn-gps').onclick = () => {
                 navigator.geolocation.getCurrentPosition(p => {
                     updatePosition(p.coords.latitude, p.coords.longitude);
                     reportMap.setView(currentPos, 15);
-                });
+                }, (err) => console.warn("GPS-fel:", err));
             };
+            
             document.getElementById('btn-submit').onclick = validateAndSubmit;
             document.getElementById('btn-download').onclick = downloadCSV;
         }
@@ -371,10 +349,14 @@
             if (!isRapportera) setTimeout(() => exploreMap.invalidateSize(), 200);
         }
 
-        function loadData() {
-            // Följer regeln för pathing
-            const q = query(collection(db, 'artifacts', appId, 'public', 'data', 'tester'));
-            onSnapshot(q, (snapshot) => {
+        function loadData(user) {
+            if (!user) return;
+            
+            // Skapa sökvägen enligt de strikta reglerna för artifacts
+            const testerCol = collection(db, 'artifacts', appId, 'public', 'data', 'tester');
+            
+            // Starta lyssnaren
+            onSnapshot(testerCol, (snapshot) => {
                 testResults = [];
                 exploreMarkers.forEach(m => exploreMap.removeLayer(m));
                 exploreMarkers = [];
@@ -383,12 +365,22 @@
                     testResults.push(data);
                     addMarkerToExplore(data);
                 });
-            }, (err) => console.error("Firestore Error:", err));
+                console.log("Data laddad:", testResults.length, "tester hittades.");
+            }, (err) => {
+                console.error("Snapshot error (App Check eller Permissions):", err);
+                // Om vi får 403 här beror det på att App Check-token nekas av Firebase server
+                if (err.code === 'permission-denied') {
+                    console.warn("Tips: Kontrollera att Debug Token är registrerad i Firebase-konsolen för App Check.");
+                }
+            });
         }
 
         function resetForm() {
             const inputs = ['form-kod', 'form-klass', 'form-plats', 'form-temp', 'form-siktdjup', 'form-syrehalt', 'form-kvave', 'form-fosfor', 'form-obs', 'form-vaska'];
-            inputs.forEach(id => document.getElementById(id).value = "");
+            inputs.forEach(id => {
+                const el = document.getElementById(id);
+                if(el) el.value = "";
+            });
             document.getElementById('form-skola').value = "";
             document.getElementById('form-ecoli').value = "välj";
             document.getElementById('form-grumlighet').value = "0";
@@ -410,6 +402,11 @@
         }
 
         async function validateAndSubmit() {
+            if (!auth.currentUser) {
+                alert("Väntar på anslutning till servern...");
+                return;
+            }
+
             const kod = document.getElementById('form-kod').value.trim().toUpperCase();
             const kodNum = parseInt(kod.replace('VSK', ''));
             const kodValid = /^VSK\d{3}$/.test(kod) && kodNum >= 70 && kodNum <= 99;
@@ -463,21 +460,25 @@
                 alger: selectedAlger, status: selectedStatus,
                 obs: document.getElementById('form-obs').value,
                 vaska: document.getElementById('form-vaska').value,
-                timestamp: new Date().toISOString(), datumStr: datum
+                timestamp: new Date().toISOString(), datumStr: datum,
+                userId: auth.currentUser.uid
             };
 
             try {
-                await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'tester'), payload);
-                document.getElementById('success-summary').innerHTML = `<b>${skola} klass ${klass}</b><br/>📍 ${plats}, ${datum}<br/><br/>Tack för er rapport, nu syns den på kartan tillsammans med tidigare rapporter`;
+                const testerCol = collection(db, 'artifacts', appId, 'public', 'data', 'tester');
+                await addDoc(testerCol, payload);
+                
+                document.getElementById('success-summary').innerHTML = `<b>${skola} klass ${klass}</b><br/>📍 ${plats}, ${datum}<br/><br/>Tack för er rapport!`;
                 document.getElementById('success-modal').classList.remove('hidden');
+                
                 setTimeout(() => {
                     document.getElementById('success-modal').classList.add('hidden');
                     resetForm();
                     switchTab('utforska');
-                }, 5000);
+                }, 4000);
             } catch (err) { 
                 console.error("Submit error:", err);
-                alert("Något gick fel när data skulle skickas. Försök igen.");
+                alert("Kunde inte skicka. Kontrollera din internetanslutning eller App Check-inställningar.");
             }
         }
 
@@ -490,21 +491,10 @@
             }).addTo(exploreMap).bindPopup(`
                 <div style="min-width:180px">
                     <b style="font-size:14px; color:${colors[data.skola]}">${data.skola} klass ${data.klass}</b><br/>
-                    <div style="font-size:11px; color:#64748b; margin:4px 0">📍 ${data.plats} <span style="margin-left:4px">${data.datumStr || ''}</span></div>
+                    <div style="font-size:11px; color:#64748b; margin:4px 0">📍 ${data.plats}</div>
                     <div style="display:grid; grid-template-columns: 1fr 1fr; font-size:11px; gap:4px; border-top:1px solid #eee; padding-top:6px">
-                        <span>Temp: <b>${data.temp}°C</b></span>
-                        <span>Siktdjup: <b>${data.sikt}m</b></span>
-                        <span>Grumlig: <b>${data.grumlighet}</b></span>
-                        <span>Syre: <b>${data.syre}%</b></span>
                         <span>pH: <b>${data.ph}</b></span>
-                        <span>Kväve: <b>${data.kvave}</b></span>
-                        <span>Fosfor: <b>${data.fosfor}</b></span>
-                        <span>Alger: <b>${data.alger}</b></span>
-                    </div>
-                    <div style="font-size:11px; margin-top:4px">E.coli: <b>${data.ecoli}</b></div>
-                    <div style="font-size:10px; font-style:italic; margin-top:6px; color:#475569">${data.obs ? '"' + data.obs + '"' : ''}</div>
-                    <div style="margin-top:6px; padding-top:4px; border-top:1px solid #e2e8f0; font-weight:bold; color:${data.status === 'Friskt' ? '#16a34a' : '#dc2626'}">
-                        Status: ${data.status}
+                        <span>Temp: <b>${data.temp}°C</b></span>
                     </div>
                 </div>
             `);
@@ -515,16 +505,15 @@
             if (testResults.length === 0) return;
             const headers = ["Datum", "Skola", "Klass", "Plats", "Lat", "Lng", "Temp", "Siktdjup", "Grumlighet", "Syre", "pH", "Kväve", "Fosfor", "Ecoli", "Alger", "Status", "Observationer"];
             const rows = testResults.map(r => [
-                r.datumStr || new Date(r.timestamp).toLocaleDateString(), r.skola, r.klass, r.plats, r.lat, r.lng, r.temp, r.sikt, r.grumlighet, r.syre, r.ph, r.kvave, r.fosfor, r.ecoli, r.alger, r.status, `"${r.obs?.replace(/"/g, '""')}"`
+                r.datumStr || "", r.skola, r.klass, r.plats, r.lat, r.lng, r.temp, r.sikt, r.grumlighet, r.syre, r.ph, r.kvave, r.fosfor, r.ecoli, r.alger, r.status, `"${r.obs?.replace(/"/g, '""')}"`
             ]);
             let csvContent = "data:text/csv;charset=utf-8,\uFEFF" + headers.join(";") + "\n" + rows.map(e => e.join(";")).join("\n");
             const link = document.createElement("a");
             link.href = encodeURI(csvContent);
-            link.download = `vattentest_varmdo_${new Date().toISOString().split('T')[0]}.csv`;
+            link.download = `vattentest_${new Date().toISOString().split('T')[0]}.csv`;
             link.click();
         }
 
-        // Starta appen
         window.addEventListener('load', init);
     </script>
 </body>
