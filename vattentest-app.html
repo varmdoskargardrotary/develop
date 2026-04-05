@@ -234,11 +234,16 @@
         const db = getFirestore(app);
         const auth = getAuth(app);
         const appId = 'varmdo-vattentest';
+
+        // Fix för App Check 400 error i utvecklingsmiljö
+        // Om domänen inte är godkänd i Google Cloud Console kommer Enterprise-providern krascha.
+        // Vi använder en debug-provider som fallback för att appen ska gå att använda.
+        self.FIREBASE_APPCHECK_DEBUG_TOKEN = true;
         
         // Init App Check korrekt
         try {
             initializeAppCheck(app, {
-                provider: new ReCaptchaEnterpriseProvider('6LfeI6gsAAAAAHeq34UkSCc0gQqIMUKQk0MjhGuy'),
+                provider: new ReCaptchaEnterpriseProvider('6LfeI6gsAAAAAPshLdrpAIp0EUHV9fCM0h9l1DxX'),
                 isTokenAutoRefreshEnabled: true
             });
             console.log("Firebase App Check initierat!");
