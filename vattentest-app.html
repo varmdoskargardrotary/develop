@@ -43,15 +43,6 @@
             </div>
             <div id="connection-status" class="w-3 h-3 bg-slate-400 rounded-full"></div>
         </header>
-
-<!-- Firebase SDK -->
-<script type="module">
-  // Importera Firebase-moduler
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-  import { getAuth } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-  import { getFirestore } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-  import { getAppCheck, ReCaptchaEnterpriseProvider } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app-check.js";
-</script>
         
         <!-- Tabs -->
         <nav class="px-4 mt-6">
@@ -221,10 +212,12 @@
         </div>
     </div>
 
+    <!-- Firebase Script -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getFirestore, collection, addDoc, onSnapshot, query } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
         import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { initializeAppCheck, ReCaptchaEnterpriseProvider } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app-check.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyBtQ7bcDV7y_zTdYw8gJT0KppF3R6EWINU",
@@ -241,12 +234,17 @@
         const db = getFirestore(app);
         const auth = getAuth(app);
         const appId = 'varmdo-vattentest';
-        const appCheck = getAppCheck(app);
-        appCheck.activate(
-              new ReCaptchaEnterpriseProvider('6LfeI6gsAAAAAPshLdrpAIp0EUHV9fCM0h9l1DxX'),
-            true
-          );
-        console.log("Firebase App och App Check initierade korrekt!");
+        
+        // Init App Check korrekt
+        try {
+            initializeAppCheck(app, {
+                provider: new ReCaptchaEnterpriseProvider('6LfeI6gsAAAAAPshLdrpAIp0EUHV9fCM0h9l1DxX'),
+                isTokenAutoRefreshEnabled: true
+            });
+            console.log("Firebase App Check initierat!");
+        } catch (e) {
+            console.error("Kunde inte initiera App Check:", e);
+        }
         
         let currentPos = [59.3293, 18.3869];
         let reportMap, exploreMap, reportMarker;
@@ -255,7 +253,6 @@
         let testResults = [];
         let exploreMarkers = [];
 
-        // Helper to handle Swedish decimal comma
         const toSEString = (val) => {
             if (val === undefined || val === null || val === "") return "";
             return val.toString().replace('.', ',');
@@ -267,6 +264,7 @@
             setupEventListeners();
             
             try {
+                // Vänta på auth
                 await signInAnonymously(auth);
                 onAuthStateChanged(auth, (user) => {
                     if (user) {
@@ -274,8 +272,10 @@
                         loadData();
                     }
                 });
-            } catch (err) { console.error(err);
-                          alert("Fel vid inskick: " + err.message);}
+            } catch (err) { 
+                console.error(err);
+                alert("Kunde inte ansluta till databasen.");
+            }
         }
 
         function initMaps() {
@@ -367,6 +367,7 @@
         }
 
         function loadData() {
+            // Följer regeln för pathing
             const q = query(collection(db, 'artifacts', appId, 'public', 'data', 'tester'));
             onSnapshot(q, (snapshot) => {
                 testResults = [];
@@ -377,7 +378,7 @@
                     testResults.push(data);
                     addMarkerToExplore(data);
                 });
-            }, (err) => console.error(err));
+            }, (err) => console.error("Firestore Error:", err));
         }
 
         function resetForm() {
@@ -469,7 +470,10 @@
                     resetForm();
                     switchTab('utforska');
                 }, 5000);
-            } catch (err) { console.error(err); }
+            } catch (err) { 
+                console.error("Submit error:", err);
+                alert("Något gick fel när data skulle skickas. Försök igen.");
+            }
         }
 
         function addMarkerToExplore(data) {
@@ -515,7 +519,8 @@
             link.click();
         }
 
-        window.onload = init;
+        // Starta appen
+        window.addEventListener('load', init);
     </script>
 </body>
 </html>
