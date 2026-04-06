@@ -482,6 +482,7 @@
             }
         }
 
+        // POPUP med testresultat
         function addMarkerToExplore(data) {
             const colors = {'Hemmestaskolan': '#1e40af', 'Kyrkskolan': '#22c55e', 'Lemshaga': '#a855f7'};
             const m = L.circleMarker([data.lat, data.lng], {
@@ -495,7 +496,7 @@
                     <div style="display:grid; grid-template-columns: 1fr 1fr; font-size:11px; gap:4px; border-top:1px solid #eee; padding-top:6px">
                         <span>Temp: <b>${data.temp}°C</b></span>
                         <span>Siktdjup: <b>${data.sikt}m</b></span>
-                        <span>Grumlig: <b>${data.grumlighet}</b></span>
+                        <span>Grumlighet: <b>${data.grumlighet}</b></span>
                         <span>Syre: <b>${data.syre}%</b></span>
                         <span>pH: <b>${data.ph}</b></span>
                         <span>Kväve: <b>${data.kvave}</b></span>
